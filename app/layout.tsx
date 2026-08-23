@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SOCIAL_LINKS, SOCIAL_IMAGE } from "@/lib/site";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SOCIAL_LINKS, SOCIAL_IMAGE, THEME_COLOR } from "@/lib/site";
 
 // Define fonts with next/font. Only ship the weights actually used on the
 // site — the hero heading is the LCP element, so every extra font byte
@@ -69,6 +69,7 @@ export const metadata: Metadata = {
         width: SOCIAL_IMAGE.width,
         height: SOCIAL_IMAGE.height,
         alt: SOCIAL_IMAGE.alt,
+        type: SOCIAL_IMAGE.type,
       },
     ],
   },
@@ -90,13 +91,20 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.png", sizes: "64x64", type: "image/png" },
     ],
     shortcut: "/favicon.png",
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
+  manifest: "/manifest.webmanifest",
+};
+
+// Tints the mobile browser toolbar to match the site.
+export const viewport: Viewport = {
+  themeColor: THEME_COLOR,
 };
 
 // schema.org structured data — gives search engines and AI agents a machine-readable
